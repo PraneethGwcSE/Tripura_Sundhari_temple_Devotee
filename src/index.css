@@ -2,24 +2,33 @@
 
 /* -------------------------------------------------------------------------
    Global Reusable Typography Variables
-   Heading: Cormorant Garamond with Noto Serif regional fallbacks
-   Body & UI: Inter with Noto Sans regional fallbacks
+   Heading: Montserrat with Noto Sans regional fallbacks
+   Body & UI: Roboto / Robout with Noto Sans regional fallbacks
+   Numbers: Roboto / Robout / Montserrat with lining tabular numerals
    ------------------------------------------------------------------------- */
+@font-face {
+  font-family: 'Robout';
+  src: local('Roboto'), local('Roboto-Regular');
+}
+
 :root {
-  --font-heading: "Cormorant Garamond", "Noto Serif Bengali", "Noto Serif Devanagari", Georgia, serif;
-  --font-body: "Inter", "Noto Sans Bengali", "Noto Sans Devanagari", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-heading: "Montserrat", "Noto Sans Bengali", "Noto Sans Devanagari", sans-serif;
+  --font-body: "Roboto", "Robout", "Noto Sans Bengali", "Noto Sans Devanagari", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-numbers: "Roboto", "Robout", "Montserrat", system-ui, sans-serif;
   --font-serif: var(--font-heading);
   --font-sans: var(--font-body);
 }
 
 :lang(bn) {
-  --font-heading: "Noto Serif Bengali", "Cormorant Garamond", serif;
-  --font-body: "Noto Sans Bengali", "Inter", sans-serif;
+  --font-heading: "Montserrat", "Noto Sans Bengali", sans-serif;
+  --font-body: "Roboto", "Robout", "Noto Sans Bengali", sans-serif;
+  --font-numbers: "Roboto", "Robout", "Noto Sans Bengali", sans-serif;
 }
 
 :lang(hi) {
-  --font-heading: "Noto Serif Devanagari", "Cormorant Garamond", serif;
-  --font-body: "Noto Sans Devanagari", "Inter", sans-serif;
+  --font-heading: "Montserrat", "Noto Sans Devanagari", sans-serif;
+  --font-body: "Roboto", "Robout", "Noto Sans Devanagari", sans-serif;
+  --font-numbers: "Roboto", "Robout", "Noto Sans Devanagari", sans-serif;
 }
 
 @theme {
@@ -52,10 +61,11 @@
   --color-charcoal-muted: #443948;
   --color-charcoal-light: #635767;
 
-  --font-serif: "Cormorant Garamond", "Noto Serif Bengali", "Noto Serif Devanagari", Georgia, serif;
-  --font-heading: "Cormorant Garamond", "Noto Serif Bengali", "Noto Serif Devanagari", Georgia, serif;
-  --font-sans: "Inter", "Noto Sans Bengali", "Noto Sans Devanagari", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --font-body: "Inter", "Noto Sans Bengali", "Noto Sans Devanagari", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-serif: "Montserrat", "Noto Sans Bengali", "Noto Sans Devanagari", sans-serif;
+  --font-heading: "Montserrat", "Noto Sans Bengali", "Noto Sans Devanagari", sans-serif;
+  --font-sans: "Roboto", "Robout", "Noto Sans Bengali", "Noto Sans Devanagari", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-body: "Roboto", "Robout", "Noto Sans Bengali", "Noto Sans Devanagari", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-numbers: "Roboto", "Robout", "Montserrat", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
 @layer base {
@@ -68,7 +78,6 @@
     overscroll-behavior-y: none;
     font-family: var(--font-body);
     font-size: 16px;
-    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
     background-color: #FFF8ED;
     color: #1A121E;
     -webkit-font-smoothing: antialiased;
@@ -81,24 +90,23 @@
     overflow: hidden;
   }
 
-  /* 1. Global Headings: Cormorant Garamond with confident bold weight, no hairline thinning, modern lining numerals */
+  /* 1. Global Headings: Montserrat with confident bold weight, modern lining numerals */
   h1, h2, h3, h4, h5, h6, .font-heading, .font-serif {
     font-family: var(--font-heading);
-    letter-spacing: -0.012em;
+    letter-spacing: -0.015em;
     font-weight: 700;
-    -webkit-text-stroke: 0.2px currentColor;
-    font-variant-numeric: lining-nums;
-    font-feature-settings: "lnum" 1;
+    font-variant-numeric: lining-nums tabular-nums;
+    font-feature-settings: "lnum" 1, "tnum" 1;
   }
 
   h1 {
     font-weight: 700;
-    letter-spacing: -0.018em;
+    letter-spacing: -0.02em;
   }
 
   h2 {
     font-weight: 700;
-    letter-spacing: -0.014em;
+    letter-spacing: -0.015em;
   }
 
   h3 {
@@ -109,15 +117,15 @@
     font-weight: 600;
   }
 
-  /* 2. Global Body & UI: Inter with solid medium/semibold weights and high-contrast color */
+  /* 2. Global Body & UI: Roboto / Robout with clean legibility */
   body, input, select, textarea, label, table, nav {
     font-family: var(--font-body);
-    font-weight: 500;
+    font-weight: 400;
   }
 
   p {
     font-family: var(--font-body);
-    font-weight: 500;
+    font-weight: 400;
     color: #332936;
   }
 
@@ -126,8 +134,8 @@
     font-weight: 600;
   }
 
-  /* 4. Numerical Readability Rule:
-     Use Inter for timings, dates, queue waiting times, prices, donation amounts, booking information
+  /* 3. Numerical Readability Rule:
+     Use Roboto / Robout / Montserrat for timings, dates, queue waiting times, prices, donation amounts, booking information
      Apply lining-nums tabular-nums */
   .tabular-nums,
   .font-numeric,
@@ -136,8 +144,10 @@
   data,
   input[type="date"],
   input[type="time"],
-  input[type="number"] {
-    font-family: var(--font-body) !important;
+  input[type="number"],
+  .number,
+  .price {
+    font-family: var(--font-numbers) !important;
     font-variant-numeric: lining-nums tabular-nums !important;
     font-feature-settings: "tnum" 1, "lnum" 1 !important;
     font-weight: 700;
